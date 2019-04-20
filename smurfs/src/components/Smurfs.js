@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getSmurfs } from '../actions';
+import { getSmurfs, deleteSmurf } from '../actions';
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
@@ -14,12 +13,14 @@ class Smurfs extends Component {
   render() {
     return (
       <section className="smurfs-list">
-
-
         <ul>
           {this.props.smurfs.map( (smurf) => {
               return (
-                <Smurf key={smurf.id} smurf={smurf}/>
+                <Smurf key={smurf.id}
+                       smurf={smurf}
+                       deleteSmurf={this.props.deleteSmurf}
+
+                />
               )
             })
           }
@@ -37,6 +38,9 @@ const mapStateToProps = ({smurfs, isLoading}) => ({
 export default (
   connect(
     mapStateToProps,
-    { getSmurfs }
+    {
+      getSmurfs,
+      deleteSmurf,
+    }
   )(Smurfs)
 );

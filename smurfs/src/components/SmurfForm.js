@@ -17,7 +17,6 @@ class SmurfForm extends Component {
     const newSmurf = {
       ...this.state,
     }
-
     this.props.addSmurf(newSmurf);
 
     this.setState({
@@ -26,7 +25,6 @@ class SmurfForm extends Component {
       height: '',
     });
     this.props.history.push("/");
-
   }
 
   handleInputChange = e => {
@@ -57,7 +55,6 @@ class SmurfForm extends Component {
             name="height"
           />
           <button type="submit">Add to the village</button>
-
 
         </form>
 

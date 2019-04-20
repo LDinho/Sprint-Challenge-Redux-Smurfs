@@ -40,10 +40,24 @@ export const addSmurf = (newSmurf) => (dispatch) => {
   );
 
   return request.then(({data}) => {
-    console.log('AXIOS-POST-RES:', data);
     dispatch({type: ADDING_SMURF_SUCCESS, payload: data});
   })
     .catch(err => {
       dispatch({type: ADDING_SMURF_FAILURE, error: err});
+    });
+};
+
+export const DELETING_SMURF_SUCCESS = "deleting_smurf_success";
+export const DELETING_SMURF_FAILURE = "deleting_smurf_failure";
+
+export const deleteSmurf = (smurfId) => (dispatch) => {
+  const request = axios.delete(
+    `http://localhost:3333/smurfs/${smurfId}`);
+
+  return request.then(({data}) => {
+    dispatch({type: DELETING_SMURF_SUCCESS, payload: data});
+  })
+    .catch(err => {
+      dispatch({type: DELETING_SMURF_FAILURE, error: err});
     });
 };

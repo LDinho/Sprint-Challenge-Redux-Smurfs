@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Smurf = ({smurf: {name, age, height}}) => {
+const Smurf = ({deleteSmurf, smurf: {id, name, age, height}}) => {
   return (
     <li>
       <div>
@@ -8,6 +8,11 @@ const Smurf = ({smurf: {name, age, height}}) => {
         <p>Age: {age}</p>
         <p>Height: {height}</p>
       </div>
+
+      <button onClick={() => deleteSmurf(id)} >
+        Delete
+      </button>
+
     </li>
   )
 }

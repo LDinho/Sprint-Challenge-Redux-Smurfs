@@ -1,20 +1,16 @@
 /*
  {
-   smurfs: [],
-   fetchingSmurfs: false
-   addingSmurf: false
    updatingSmurf: false
-   deletingSmurf: false
-   error: null
  }
 */
-
 import {
   FETCHING_SMURFS,
   FETCHING_SMURFS_SUCCESS,
   FETCHING_SMURFS_FAILURE,
   ADDING_SMURF_SUCCESS,
   ADDING_SMURF_FAILURE,
+  DELETING_SMURF_SUCCESS,
+  DELETING_SMURF_FAILURE,
 } from "../actions";
 
 const initialState = {
@@ -22,6 +18,7 @@ const initialState = {
   isLoading: false,
   error: '',
   addingSmurf: false,
+  deletingSmurf: false,
 };
 
 export default (state = initialState, action) => {
@@ -50,10 +47,22 @@ export default (state = initialState, action) => {
         addingSmurf: true,
         smurfs: action.payload,
       };
-      case ADDING_SMURF_FAILURE:
+    case ADDING_SMURF_FAILURE:
       return {
         ...state,
         addingSmurf: false,
+        error: action.payload,
+      };
+    case DELETING_SMURF_SUCCESS:
+      return {
+        ...state,
+        deletingSmurf: true,
+        smurfs: action.payload,
+      };
+    case DELETING_SMURF_FAILURE:
+      return {
+        ...state,
+        deletingSmurf: false,
         error: action.payload,
       };
     default:

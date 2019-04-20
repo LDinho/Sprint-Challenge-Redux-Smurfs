@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getSmurfs } from '../actions';
@@ -14,17 +14,7 @@ class Smurfs extends Component {
   render() {
     return (
       <section className="smurfs-list">
-        <Link to="/">
-          <div className="button-home">
-            Village
-          </div>
-        </Link>
 
-        <Link to="/new">
-          <div className="button-add">
-            Add a Smurf
-          </div>
-        </Link>
 
         <ul>
           {this.props.smurfs.map( (smurf) => {

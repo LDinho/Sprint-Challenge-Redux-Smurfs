@@ -24,7 +24,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_SMURFS:
-      console.log('STATE:', state)
       return {
         ...state,
         error: '',
@@ -34,7 +33,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        characters: action.payload,
+        smurfs: action.payload,
       };
     case FETCHING_SMURFS_FAILURE:
       return {

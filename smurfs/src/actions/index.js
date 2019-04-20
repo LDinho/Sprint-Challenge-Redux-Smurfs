@@ -21,7 +21,7 @@ export const getSmurfs = () => (dispatch) => {
 
   return request.then(({ data }) => {
     console.log('AXIOS-GET-RES:', data);
-    dispatch({type: FETCHING_SMURFS_SUCCESS, payload: data.results});
+    dispatch({type: FETCHING_SMURFS_SUCCESS, payload: data});
   })
     .catch(err => {
       dispatch({type: FETCHING_SMURFS_FAILURE, error: err});

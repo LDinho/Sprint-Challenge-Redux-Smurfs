@@ -1,8 +1,3 @@
-/*
- {
-   updatingSmurf: false
- }
-*/
 import {
   FETCHING_SMURFS,
   FETCHING_SMURFS_SUCCESS,
@@ -11,14 +6,18 @@ import {
   ADDING_SMURF_FAILURE,
   DELETING_SMURF_SUCCESS,
   DELETING_SMURF_FAILURE,
+  UPDATING_SMURF,
+  UPDATING_SMURF_SUCCESS,
+  UPDATING_SMURF_FAILURE,
 } from "../actions";
 
 const initialState = {
   smurfs: [],
   isLoading: false,
-  error: '',
+  error: null,
   addingSmurf: false,
   deletingSmurf: false,
+  smurfInEditMode: null,
 };
 
 export default (state = initialState, action) => {
@@ -26,13 +25,13 @@ export default (state = initialState, action) => {
     case FETCHING_SMURFS:
       return {
         ...state,
-        error: '',
         isLoading: true,
       };
     case FETCHING_SMURFS_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        error: null,
         smurfs: action.payload,
       };
     case FETCHING_SMURFS_FAILURE:
@@ -45,6 +44,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         addingSmurf: true,
+        error: null,
         smurfs: action.payload,
       };
     case ADDING_SMURF_FAILURE:
@@ -57,12 +57,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
         deletingSmurf: true,
+        error: null,
         smurfs: action.payload,
       };
     case DELETING_SMURF_FAILURE:
       return {
         ...state,
         deletingSmurf: false,
+        error: action.payload,
+      };
+    case UPDATING_SMURF:
+      return {
+        ...state,
+        smurfInEditMode: action.payload,
+      };
+    case UPDATING_SMURF_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        smurfInEditMode: null,
+        smurfs: action.payload,
+      };
+    case UPDATING_SMURF_FAILURE:
+      return {
+        ...state,
         error: action.payload,
       };
     default:

@@ -20,6 +20,10 @@ class Smurf extends Component  {
     this.props.updatingSmurf(id);
   }
 
+   cancelEditSmurf = () => {
+    this.props.updatingSmurf(null);
+  }
+
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -90,6 +94,10 @@ class Smurf extends Component  {
             </p>
             }
             <button type="submit">Save</button>
+            <button type="button"
+                    onClick={this.cancelEditSmurf}>
+              Cancel
+            </button>
           </form>
         </div>
       )

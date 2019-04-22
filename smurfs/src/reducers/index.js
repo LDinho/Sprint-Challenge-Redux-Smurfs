@@ -2,6 +2,7 @@ import {
   FETCHING_SMURFS,
   FETCHING_SMURFS_SUCCESS,
   FETCHING_SMURFS_FAILURE,
+  ADDING_SMURF,
   ADDING_SMURF_SUCCESS,
   ADDING_SMURF_FAILURE,
   DELETING_SMURF_SUCCESS,
@@ -40,10 +41,15 @@ export default (state = initialState, action) => {
         isLoading: false,
         error: action.payload
       };
-    case ADDING_SMURF_SUCCESS:
+    case ADDING_SMURF:
       return {
         ...state,
         addingSmurf: true,
+    };
+    case ADDING_SMURF_SUCCESS:
+      return {
+        ...state,
+        addingSmurf: false,
         error: null,
         smurfs: action.payload,
       };

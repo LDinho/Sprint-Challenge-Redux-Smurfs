@@ -17,14 +17,19 @@ class SmurfForm extends Component {
     const newSmurf = {
       ...this.state,
     }
-    this.props.addSmurf(newSmurf);
 
-    this.setState({
-      name: '',
-      age: '',
-      height: '',
+    this.props.addSmurf(newSmurf).then(() => {
+      if (!this.props.error) {
+
+        this.setState({
+          name: '',
+          age: '',
+          height: '',
+        });
+
+        this.props.history.push("/");
+      }
     });
-    this.props.history.push("/");
   }
 
   handleInputChange = e => {
@@ -34,6 +39,12 @@ class SmurfForm extends Component {
   render() {
     return (
       <div className="form-wrapper">
+
+        { this.props.error &&
+        <p>
+          Please fill out all fields!
+        </p>
+        }
 
         <form onSubmit={this.addSmurf}>
           <input
@@ -63,10 +74,11 @@ class SmurfForm extends Component {
   }
 }
 
-const mapStateToProps = ({smurfs, addingSmurf, isLoading}) => ({
+const mapStateToProps = ({smurfs, addingSmurf, isLoading, error}) => ({
   smurfs,
   isLoading,
   addingSmurf,
+  error,
 });
 
 export default (

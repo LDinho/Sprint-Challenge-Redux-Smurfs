@@ -17,12 +17,12 @@ export const getSmurfs = () => (dispatch) => {
     });
 };
 
-// export const ADDING_SMURF = "adding_smurf";
+export const ADDING_SMURF = "adding_smurf";
 export const ADDING_SMURF_SUCCESS = "adding_smurf_success";
 export const ADDING_SMURF_FAILURE = "adding_smurf_failure";
 
 export const addSmurf = (newSmurf) => (dispatch) => {
-  // dispatch({ type: ADDING_SMURF });
+  dispatch({ type: ADDING_SMURF });
 
   const request = axios.post(
     `http://localhost:3333/smurfs`,
@@ -33,7 +33,7 @@ export const addSmurf = (newSmurf) => (dispatch) => {
     dispatch({type: ADDING_SMURF_SUCCESS, payload: data});
   })
     .catch(err => {
-      dispatch({type: ADDING_SMURF_FAILURE, error: err});
+      dispatch({type: ADDING_SMURF_FAILURE, payload: err});
     });
 };
 

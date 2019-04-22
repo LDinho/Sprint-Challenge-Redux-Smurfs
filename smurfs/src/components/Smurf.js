@@ -8,11 +8,14 @@ class Smurf extends Component  {
 
     const {smurf: {name, age, height}} = this.props;
 
-    this.state = {
+    this.defaultState = {
       name: name,
       age: age,
       height: height,
+      hasError: false,
     }
+
+    this.state = this.defaultState;
   }
 
   editSmurf = () => {
@@ -20,8 +23,11 @@ class Smurf extends Component  {
     this.props.updatingSmurf(id);
   }
 
-   cancelEditSmurf = () => {
+   cancelEditSmurf = (e) => {
+    e.preventDefault();
     this.props.updatingSmurf(null);
+
+    this.setState(this.defaultState);
   }
 
   handleInputChange = (event) => {
@@ -37,15 +43,25 @@ class Smurf extends Component  {
     event.preventDefault();
 
     const {smurf: {id}} = this.props;
+    const { name, age, height } = this.state;
 
     const updatedSmurf = {
       id,
-      name: this.state.name,
-      age: this.state.age,
-      height: this.state.height,
+      name,
+      age,
+      height,
     };
 
-    this.props.saveUpdatedSmurf(updatedSmurf)
+    if (!name || !age || !height) {
+      this.setState({hasError: true});
+      return;
+    }
+
+    this.props.saveUpdatedSmurf(updatedSmurf);
+
+    if (this.state.hasError) {
+      this.setState({hasError: false});
+    }
   }
 
   render () {
@@ -79,16 +95,16 @@ class Smurf extends Component  {
               />
             </label>
 
-            <label> Email:
+            <label> Height:
               <input
                 type="string"
-                name="email"
+                name="height"
                 onChange={this.handleInputChange}
-                placeholder="Enter email"
+                placeholder="Enter height"
                 value={this.state.height}
               />
             </label>
-            { this.props.error &&
+            { this.state.hasError &&
             <p>
               Please fill out all fields!
             </p>
